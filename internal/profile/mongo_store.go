@@ -41,6 +41,18 @@ func (s *MongoStore) Get() (Profile, error) {
 	return profile, err
 }
 
+func (s *MongoStore) Save(profile Profile) (Profile, error) {
+	ctx, cancel := s.context()
+	defer cancel()
+	_, err := s.collection.UpdateOne(
+		ctx,
+		bson.D{{Key: "_id", Value: ownerProfileID}},
+		bson.D{{Key: "$set", Value: mongoProfile{ID: ownerProfileID, Profile: profile}}},
+		options.Update().SetUpsert(true),
+	)
+	return profile, err
+}
+
 func (s *MongoStore) context() (context.Context, context.CancelFunc) {
 	return context.WithTimeout(context.Background(), s.timeout)
 }

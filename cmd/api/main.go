@@ -72,7 +72,7 @@ func main() {
 	}
 
 	contactHandler := contact.NewHandler(contactStore, adminToken)
-	profileHandler := profile.NewHandler(profileStore)
+	profileHandler := profile.NewHandler(profileStore, adminToken)
 	dashboardHandler := dashboard.NewHandler(contactStore, profileStore, adminToken)
 	personalHandler := personal.NewHandler(personalStore, adminToken)
 	aiHandler := ai.NewHandler(personalStore, ai.NewClient(env("AI_PROVIDER", "local"), env("AI_API_KEY", ""), env("AI_MODEL", "")), adminToken)
@@ -83,6 +83,7 @@ func main() {
 		web.WriteJSON(w, http.StatusOK, map[string]string{"service": "profile-backend", "status": "ok", "time": time.Now().UTC().Format(time.RFC3339)})
 	})
 	mux.HandleFunc("GET /api/profile", profileHandler.Get)
+	mux.HandleFunc("PUT /api/profile", profileHandler.Update)
 	mux.HandleFunc("POST /api/contact", contactHandler.Create)
 	mux.HandleFunc("GET /api/contact/messages", contactHandler.List)
 	mux.HandleFunc("PATCH /api/contact/messages/{id}", contactHandler.UpdateStatus)

@@ -107,6 +107,20 @@ create table if not exists personal_transactions (
 create index if not exists personal_transactions_occurred_at_idx
 	on personal_transactions (occurred_at desc);
 
+create table if not exists personal_habits (
+	id text primary key,
+	name text not null,
+	target text not null,
+	frequency text not null default 'daily',
+	streak integer not null default 0,
+	last_checked_at timestamptz not null default '0001-01-01 00:00:00+00',
+	created_at timestamptz not null,
+	updated_at timestamptz not null
+);
+
+create index if not exists personal_habits_order_idx
+	on personal_habits (streak desc, updated_at desc);
+
 create table if not exists notification_tokens (
 	id text primary key,
 	token text not null unique,

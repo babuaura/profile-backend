@@ -4,3 +4,5 @@
 !.gitkeep
 .env
 .env.*
+backend.out.log
+backend.err.log

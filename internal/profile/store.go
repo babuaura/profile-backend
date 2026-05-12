@@ -8,7 +8,10 @@ import (
 	"sync"
 )
 
-type Store interface{ Get() (Profile, error) }
+type Store interface {
+	Get() (Profile, error)
+	Save(Profile) (Profile, error)
+}
 type FileStore struct {
 	path string
 	mu   sync.Mutex
@@ -35,6 +38,12 @@ func (s *FileStore) Get() (Profile, error) {
 	return profile, nil
 }
 
+func (s *FileStore) Save(profile Profile) (Profile, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return profile, s.writeLocked(profile)
+}
+
 func (s *FileStore) writeLocked(profile Profile) error {
 	if err := os.MkdirAll(filepath.Dir(s.path), 0755); err != nil {
 		return err
@@ -51,10 +60,10 @@ func (s *FileStore) writeLocked(profile Profile) error {
 
 func defaultProfile() Profile {
 	return Profile{
-		Name: "Profile Owner", Title: "SaaS Engineer and Full Stack Developer", Location: "Bangalore, India", Email: "contact@example.com", Website: "https://example.com",
-		Summary:    "I build scalable SaaS products, AI-enabled systems, admin dashboards, and production-grade backend architecture.",
+		Name: "Babu Angi", Title: "SaaS Engineer and Full Stack Developer", Location: "Bangalore, India", Email: "contact@babuangi.com", Website: "https://babuangi.com",
+		Summary:    "Full Stack Engineer building scalable SaaS platforms, AI-powered systems, admin dashboards, Flutter apps, and production-grade backend architecture.",
 		Highlights: []Metric{{Label: "Experience", Value: "4+ years"}, {Label: "Projects", Value: "15+ shipped"}, {Label: "Focus", Value: "SaaS + AI"}},
-		Links:      []ProfileLink{{Label: "Website", URL: "https://example.com"}, {Label: "GitHub", URL: "https://example.com/profile-owner"}, {Label: "LinkedIn", URL: "https://www.linkedin.com/in/profile-owner/"}},
+		Links:      []ProfileLink{{Label: "Website", URL: "https://babuangi.com"}, {Label: "GitHub", URL: "https://github.com/babuangi"}, {Label: "LinkedIn", URL: "https://www.linkedin.com/in/babuangi/"}},
 		FocusAreas: []string{"SaaS platforms", "Go backends", "Flutter apps", "AI integrations", "Admin dashboards"},
 	}
 }

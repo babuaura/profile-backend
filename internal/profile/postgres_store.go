@@ -42,6 +42,20 @@ func (s *PostgresStore) Get() (Profile, error) {
 	return profile, err
 }
 
+func (s *PostgresStore) Save(profile Profile) (Profile, error) {
+	ctx, cancel := s.context()
+	defer cancel()
+	encoded, err := json.Marshal(profile)
+	if err != nil {
+		return Profile{}, err
+	}
+	_, err = s.pool.Exec(ctx, `
+		insert into profiles (id, data, updated_at) values ($1, $2, now())
+		on conflict (id) do update set data = excluded.data, updated_at = now()
+	`, ownerProfileID, encoded)
+	return profile, err
+}
+
 func (s *PostgresStore) context() (context.Context, context.CancelFunc) {
 	return context.WithTimeout(context.Background(), s.timeout)
 }

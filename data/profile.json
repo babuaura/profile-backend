@@ -1,10 +1,10 @@
 {
-  "name": "Profile Owner",
+  "name": "Babu Angi",
   "title": "SaaS Engineer and Full Stack Developer",
   "location": "Bangalore, India",
-  "email": "contact@example.com",
-  "website": "https://example.com",
-  "summary": "I build scalable SaaS products, AI-enabled systems, admin dashboards, and production-grade backend architecture.",
+  "email": "contact@babuangi.com",
+  "website": "https://babuangi.com",
+  "summary": "Full Stack Engineer building scalable SaaS platforms, AI-powered systems, admin dashboards, Flutter apps, and production-grade backend architecture.",
   "highlights": [
     {
       "label": "Experience",
@@ -22,15 +22,15 @@
   "links": [
     {
       "label": "Website",
-      "url": "https://example.com"
+      "url": "https://babuangi.com"
     },
     {
       "label": "GitHub",
-      "url": "https://example.com/profile-owner"
+      "url": "https://github.com/babuangi"
     },
     {
       "label": "LinkedIn",
-      "url": "https://www.linkedin.com/in/profile-owner/"
+      "url": "https://www.linkedin.com/in/babuangi/"
     }
   ],
   "focusAreas": [
