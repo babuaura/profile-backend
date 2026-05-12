@@ -1,0 +1,43 @@
+{
+  "name": "Profile Owner",
+  "title": "SaaS Engineer and Full Stack Developer",
+  "location": "Bangalore, India",
+  "email": "contact@example.com",
+  "website": "https://example.com",
+  "summary": "I build scalable SaaS products, AI-enabled systems, admin dashboards, and production-grade backend architecture.",
+  "highlights": [
+    {
+      "label": "Experience",
+      "value": "4+ years"
+    },
+    {
+      "label": "Projects",
+      "value": "15+ shipped"
+    },
+    {
+      "label": "Focus",
+      "value": "SaaS + AI"
+    }
+  ],
+  "links": [
+    {
+      "label": "Website",
+      "url": "https://example.com"
+    },
+    {
+      "label": "GitHub",
+      "url": "https://example.com/profile-owner"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/profile-owner/"
+    }
+  ],
+  "focusAreas": [
+    "SaaS platforms",
+    "Go backends",
+    "Flutter apps",
+    "AI integrations",
+    "Admin dashboards"
+  ]
+}
